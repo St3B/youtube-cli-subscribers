@@ -6,7 +6,7 @@ to run this program you'll need PHP 5.6, and a terminal. Currently not implement
 ``php main.php``
 and you'll be asked for your API key. You can ask for one at https://console.developers.google.com/apis/dashboard.
 
-#features:
+# features:
 - live subscribers
 - [upcoming] keep track of a channel subscribers
 - [upcoming] web service
