@@ -42,9 +42,9 @@ if (file_exists($filename))
 		$tmp_link = 'https://www.googleapis.com/youtube/v3/channels?key='.$API.'&forUsername='.$username.'&part=id';
 		//echo $tmp_link;
 		$tmp = file_get_contents($tmp_link);
-		$File2 = fopen('data/ID_response.txt', 'w+' ) or die("Unable to open file!");
+		$File2 = fopen('data/ID_response.json', 'w+' ) or die("Unable to open file!");
 		fwrite($File2, $tmp);
-		$lines = file('data/ID_response.txt');//file in to an array
+		$lines = file('data/ID_response.json');//file in to an array
 		if ($lines[11] != '')
 		{
 			$ID = $lines[11];			
@@ -83,17 +83,23 @@ else
 		goto UsernameInput;
 	}
 }
-
 //ora prendo l'ID e restituisco gli iscritti, pronti?
+
 $tmp_link = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$ID.'&key='.$API.'';
 //echo $tmp_link;
 $tmp = file_get_contents($tmp_link);
-$File3 = fopen('data/subs_response.txt', 'w+' ) or die("Unable to open file!");
+$File3 = fopen('data/subs_response.json', 'w+' ) or die("Unable to open file!");
 fwrite($File3, $tmp);
-$lines = file('data/subs_response.txt');//file in to an array
+$lines = file('data/subs_response.json');//file in to an array
 $subs = $lines[15];
 //echo $subs;
 $subs = substr($subs, 24, -3);    //dal carattere 10 all'ultimo -2, dovrebbe andare
 
-echo "l'utente [$username] ha [$subs] iscritti!\n\n";
+//TEST DEL NUOVO MODO DI GETTARE L'ID ECC
+$str = file_get_contents('data/subs_response.json');
+$json = json_decode($str, true);
+echo $json['items']['statistics']['subscriberCount'];
+echo $subs;
+
+
 ?>
