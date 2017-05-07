@@ -98,7 +98,9 @@ $subs = substr($subs, 24, -3);    //dal carattere 10 all'ultimo -2, dovrebbe and
 //TEST DEL NUOVO MODO DI GETTARE L'ID ECC
 $str = file_get_contents('data/subs_response.json');
 $json = json_decode($str, true);
-echo $json['items']['statistics']['subscriberCount'];
+
+$subznew = isset($json['items']['subscriberCount']) ? $json['items']['message'] : "";
+echo $subznew;
 echo $subs;
 
 
